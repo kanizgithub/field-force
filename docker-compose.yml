@@ -1,0 +1,15 @@
+version: "3.3"
+services:
+        auth:
+                image: osmangoni2/project-transformation-ffm-auth:01
+                ports:
+                        - "5000:8000"
+        user:
+                image: osmangoni2/project-transformation-ffm-user-management:01
+                ports:
+                        - "5001:3000"
+       
+        admin:
+                image: osmangoni2/project-transformation-ffm-admin-panel:01
+                ports:
+                        - "5002:8000"
