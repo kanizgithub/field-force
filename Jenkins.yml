@@ -1,0 +1,20 @@
+image: docker:stable
+stages:
+  - build
+ 
+build: 
+  stage: build
+  services: 
+    - docker:dind
+  script:
+    - docker info
+    - cd auth
+    - docker build -t osmangoni2/project-transformation-ffm-auth .
+    - cd ../admin
+    - docker build -t osmangoni2/project-transformation-ffm-admin-panel .
+    - cd ../user
+    - docker build -t osmangoni2/project-transformation-ffm-user-management .
+    - echo "$PASSWORD" | docker login -u "$USER" --password-stdin
+    - docker push osmangoni2/project-transformation-ffm-auth
+    - docker push osmangoni2/project-transformation-ffm-admin-panel
+    - docker push osmangoni2/project-transformation-ffm-user-management
